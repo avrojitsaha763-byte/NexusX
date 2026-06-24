@@ -15,7 +15,8 @@
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "puppeteer-core": "^25.2.1"
   },
   "author": "NexusX Team",
   "license": "ISC"
