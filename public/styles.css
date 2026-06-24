@@ -186,6 +186,16 @@ img { max-width: 100%; display: block; }
   50% { box-shadow: 0 8px 32px rgba(108, 71, 255, 0.7), 0 0 60px rgba(108, 71, 255, 0.3); }
 }
 .brand-name { font-size: 1.8rem; font-weight: 800; background: linear-gradient(135deg, #fff, rgba(255,255,255,0.7)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.brand-logo-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+.brand-logo-icon.has-img {
+  background: none;
+  box-shadow: none;
+}
 
 .brand-tagline {
   font-family: var(--font-display);
