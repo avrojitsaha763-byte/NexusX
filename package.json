@@ -1,0 +1,22 @@
+{
+  "name": "nexusx",
+  "version": "2.0.0",
+  "description": "NexusX — The Human Life Operating System. A next-generation social platform.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "author": "NexusX Team",
+  "license": "ISC"
+}

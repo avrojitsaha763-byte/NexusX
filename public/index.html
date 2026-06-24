@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexusX — Your Life Operating System</title>
+  <meta name="description" content="NexusX is the next-generation social platform built for human progress — not addiction. Share, connect, grow.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ANIMATED BACKGROUND
+═══════════════════════════════════════════════════════════ -->
+<div class="aurora-bg" aria-hidden="true">
+  <div class="aurora-orb aurora-orb-1"></div>
+  <div class="aurora-orb aurora-orb-2"></div>
+  <div class="aurora-orb aurora-orb-3"></div>
+  <div class="aurora-orb aurora-orb-4"></div>
+  <canvas id="particle-canvas"></canvas>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     AUTH VIEW
+═══════════════════════════════════════════════════════════ -->
+<div id="auth-view" class="auth-view">
+  <div class="auth-split">
+
+    <!-- Left Brand Panel -->
+    <div class="auth-brand-panel">
+      <div class="auth-brand-content">
+        <div class="brand-logo">
+          <div class="brand-logo-icon">
+            <i class="fa-solid fa-infinity"></i>
+          </div>
+          <span class="brand-name">NexusX</span>
+        </div>
+        <h1 class="brand-tagline">Your Life.<br>Operating System.</h1>
+        <p class="brand-desc">The platform built for human progress, not addiction. Share ideas, grow skills, build connections that matter.</p>
+        <div class="brand-stats">
+          <div class="brand-stat">
+            <span class="brand-stat-num">10K+</span>
+            <span class="brand-stat-label">Members</span>
+          </div>
+          <div class="brand-stat">
+            <span class="brand-stat-num">50K+</span>
+            <span class="brand-stat-label">Vibes Shared</span>
+          </div>
+          <div class="brand-stat">
+            <span class="brand-stat-num">99%</span>
+            <span class="brand-stat-label">Love It</span>
+          </div>
+        </div>
+        <div class="brand-testimonials">
+          <div class="testimonial active" id="testimonial-0">
+            <div class="testimonial-avatar">AK</div>
+            <div class="testimonial-body">
+              <p>"NexusX is the only platform where I actually feel good after scrolling."</p>
+              <span>@aravind_k · Developer</span>
+            </div>
+          </div>
+          <div class="testimonial" id="testimonial-1">
+            <div class="testimonial-avatar">SG</div>
+            <div class="testimonial-body">
+              <p>"Built my entire startup network here. Nothing else compares."</p>
+              <span>@sana_g · Founder</span>
+            </div>
+          </div>
+          <div class="testimonial" id="testimonial-2">
+            <div class="testimonial-avatar">RM</div>
+            <div class="testimonial-body">
+              <p>"Finally, a platform that respects my time and attention."</p>
+              <span>@rohit_m · Designer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Form Panel -->
+    <div class="auth-form-panel">
+      <div class="auth-form-container">
+        <div class="auth-form-header">
+          <div class="auth-form-logo">
+            <div class="brand-logo-icon sm">
+              <i class="fa-solid fa-infinity"></i>
+            </div>
+            <span>NexusX</span>
+          </div>
+        </div>
+
+        <!-- Login Form -->
+        <form id="login-form" class="auth-form active">
+          <h2>Welcome back 👋</h2>
+          <p class="form-subtitle">Sign in to continue your journey</p>
+          <div class="form-field">
+            <div class="field-icon"><i class="fa-regular fa-user"></i></div>
+            <input type="text" id="login-username" placeholder="Username" autocomplete="username" required>
+          </div>
+          <div class="form-field">
+            <div class="field-icon"><i class="fa-solid fa-lock"></i></div>
+            <input type="password" id="login-password" placeholder="Password" autocomplete="current-password" required>
+            <button type="button" class="toggle-password" onclick="togglePwd('login-password', this)">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+          <button type="submit" class="btn-auth" id="login-submit-btn">
+            <span>Sign In</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+          <p class="form-switch">New to NexusX? <a href="#" id="show-register-link">Create account</a></p>
+        </form>
+
+        <!-- Register Form -->
+        <form id="register-form" class="auth-form">
+          <h2>Join NexusX 🚀</h2>
+          <p class="form-subtitle">Your digital evolution starts here</p>
+          <div class="form-field">
+            <div class="field-icon"><i class="fa-regular fa-user"></i></div>
+            <input type="text" id="reg-username" placeholder="Username (letters, numbers, _)" autocomplete="username" required>
+          </div>
+          <div class="form-field">
+            <div class="field-icon"><i class="fa-regular fa-id-badge"></i></div>
+            <input type="text" id="reg-display-name" placeholder="Display Name">
+          </div>
+          <div class="form-field">
+            <div class="field-icon"><i class="fa-solid fa-lock"></i></div>
+            <input type="password" id="reg-password" placeholder="Password (min 6 chars)" autocomplete="new-password" required>
+            <button type="button" class="toggle-password" onclick="togglePwd('reg-password', this)">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+          <div class="password-strength" id="pwd-strength">
+            <div class="strength-bar">
+              <div class="strength-fill" id="strength-fill"></div>
+            </div>
+            <span id="strength-label">Enter a password</span>
+          </div>
+          <button type="submit" class="btn-auth" id="register-submit-btn">
+            <span>Create Account</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+          <p class="form-switch">Already a member? <a href="#" id="show-login-link">Sign in</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     MAIN APP VIEW
+═══════════════════════════════════════════════════════════ -->
+<div id="app-view" class="app-view hidden">
+
+  <!-- Left Sidebar -->
+  <aside class="sidebar-left" id="sidebar-left">
+    <div class="sidebar-inner">
+      <div class="sidebar-logo">
+        <div class="brand-logo-icon sm">
+          <i class="fa-solid fa-infinity"></i>
+        </div>
+        <span class="sidebar-brand-name">NexusX</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-btn active" data-view="feed" id="nav-feed">
+          <div class="nav-icon"><i class="fa-solid fa-house"></i></div>
+          <span>Home</span>
+          <div class="nav-indicator"></div>
+        </button>
+        <button class="nav-btn" data-view="explore" id="nav-explore">
+          <div class="nav-icon"><i class="fa-solid fa-compass"></i></div>
+          <span>Explore</span>
+        </button>
+        <button class="nav-btn" data-view="notifications" id="nav-notifications">
+          <div class="nav-icon">
+            <i class="fa-solid fa-bell"></i>
+            <span class="notif-badge hidden" id="notif-badge">0</span>
+          </div>
+          <span>Pulse</span>
+        </button>
+        <button class="nav-btn" data-view="bookmarks" id="nav-bookmarks">
+          <div class="nav-icon"><i class="fa-solid fa-bookmark"></i></div>
+          <span>Saved</span>
+        </button>
+        <button class="nav-btn" data-view="profile" id="nav-profile">
+          <div class="nav-icon"><i class="fa-solid fa-user"></i></div>
+          <span>Profile</span>
+        </button>
+      </nav>
+
+      <button class="compose-fab-sidebar" id="compose-btn-sidebar">
+        <i class="fa-solid fa-pen-to-square"></i>
+        <span>New Vibe</span>
+      </button>
+
+      <div class="sidebar-footer">
+        <div class="theme-toggle-row">
+          <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle theme">
+            <div class="theme-toggle-track">
+              <i class="fa-solid fa-sun theme-icon-light"></i>
+              <i class="fa-solid fa-moon theme-icon-dark"></i>
+              <div class="theme-toggle-thumb"></div>
+            </div>
+          </button>
+          <span class="theme-label">Light Mode</span>
+        </div>
+        <div class="sidebar-user-card" id="sidebar-user-card">
+          <img id="sidebar-avatar" src="/uploads/default-avatar.png" alt="Avatar" class="sidebar-user-avatar">
+          <div class="sidebar-user-info">
+            <span class="sidebar-user-name" id="sidebar-user-name">Loading...</span>
+            <span class="sidebar-user-handle" id="sidebar-user-handle">@...</span>
+          </div>
+          <button class="logout-btn" id="logout-btn" title="Sign out">
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content" id="main-content">
+
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div class="brand-logo-icon sm">
+        <i class="fa-solid fa-infinity"></i>
+      </div>
+      <button class="mobile-compose-btn" id="mobile-compose-btn">
+        <i class="fa-solid fa-pen-to-square"></i>
+      </button>
+    </header>
+
+    <!-- ── FEED VIEW ────────────────────────────── -->
+    <section id="view-feed" class="content-view active">
+      <div class="view-header">
+        <h1 class="view-title">Home Feed</h1>
+        <div class="feed-tabs">
+          <button class="feed-tab active" id="tab-all">For You</button>
+          <button class="feed-tab" id="tab-following">Following</button>
+        </div>
+      </div>
+
+      <!-- Composer -->
+      <div class="composer-card" id="composer-card">
+        <div class="composer-top">
+          <img id="composer-avatar" src="/uploads/default-avatar.png" alt="You" class="composer-avatar">
+          <div class="composer-input-wrap">
+            <textarea id="composer-text" placeholder="What's on your mind? Share your vibe..." maxlength="500" rows="1"></textarea>
+            <div class="char-counter">
+              <svg class="char-ring" viewBox="0 0 36 36">
+                <circle class="char-ring-bg" cx="18" cy="18" r="15.9"/>
+                <circle class="char-ring-fill" id="char-ring-fill" cx="18" cy="18" r="15.9" stroke-dasharray="0 100"/>
+              </svg>
+              <span id="char-count">500</span>
+            </div>
+          </div>
+        </div>
+        <div class="composer-img-preview hidden" id="composer-img-preview">
+          <img id="composer-preview-img" src="" alt="Preview">
+          <button class="remove-img-btn" id="remove-img-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="composer-bottom">
+          <div class="composer-actions">
+            <label class="composer-action-btn" for="composer-img-input" title="Add photo">
+              <i class="fa-regular fa-image"></i>
+              <input type="file" id="composer-img-input" accept="image/*" class="hidden">
+            </label>
+            <div class="emoji-picker-btn composer-action-btn" id="emoji-picker-btn" title="Add emoji">
+              <i class="fa-regular fa-face-smile"></i>
+              <div class="emoji-quick-panel" id="emoji-quick-panel">
+                <span class="quick-emoji" data-emoji="✨">✨</span>
+                <span class="quick-emoji" data-emoji="🔥">🔥</span>
+                <span class="quick-emoji" data-emoji="🚀">🚀</span>
+                <span class="quick-emoji" data-emoji="💡">💡</span>
+                <span class="quick-emoji" data-emoji="🎨">🎨</span>
+                <span class="quick-emoji" data-emoji="❤️">❤️</span>
+                <span class="quick-emoji" data-emoji="🌍">🌍</span>
+                <span class="quick-emoji" data-emoji="💻">💻</span>
+                <span class="quick-emoji" data-emoji="🎵">🎵</span>
+                <span class="quick-emoji" data-emoji="🤝">🤝</span>
+              </div>
+            </div>
+          </div>
+          <button class="btn-post" id="submit-vibe-btn">
+            <span>Vibe</span>
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Posts Feed -->
+      <div class="posts-container" id="feed-posts">
+        <div class="skeleton-loader">
+          <div class="skeleton-post"><div class="sk-avatar"></div><div class="sk-lines"><div class="sk-line short"></div><div class="sk-line"></div><div class="sk-line med"></div></div></div>
+          <div class="skeleton-post"><div class="sk-avatar"></div><div class="sk-lines"><div class="sk-line short"></div><div class="sk-line"></div><div class="sk-line med"></div></div></div>
+          <div class="skeleton-post"><div class="sk-avatar"></div><div class="sk-lines"><div class="sk-line short"></div><div class="sk-line"></div><div class="sk-line med"></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── EXPLORE VIEW ────────────────────────── -->
+    <section id="view-explore" class="content-view hidden">
+      <div class="view-header">
+        <h1 class="view-title">Explore</h1>
+      </div>
+      <div class="explore-search-bar">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="explore-search" placeholder="Search people, #topics, ideas...">
+        <div class="search-results-dropdown" id="search-dropdown"></div>
+      </div>
+      <div class="explore-trending-chips" id="trending-chips"></div>
+      <h3 class="section-label">People You May Know</h3>
+      <div class="people-grid" id="explore-people"></div>
+      <h3 class="section-label">Global Vibes</h3>
+      <div class="posts-container" id="explore-posts"></div>
+    </section>
+
+    <!-- ── NOTIFICATIONS VIEW ─────────────────── -->
+    <section id="view-notifications" class="content-view hidden">
+      <div class="view-header">
+        <h1 class="view-title">Pulse <span class="pulse-badge">Activity</span></h1>
+        <button class="mark-read-btn" id="mark-read-btn">Mark all read</button>
+      </div>
+      <div class="notifications-list" id="notifications-list">
+        <div class="loading-state"><i class="fa-solid fa-circle-notch fa-spin"></i> Loading...</div>
+      </div>
+    </section>
+
+    <!-- ── BOOKMARKS VIEW ─────────────────────── -->
+    <section id="view-bookmarks" class="content-view hidden">
+      <div class="view-header">
+        <h1 class="view-title">Saved Vibes <i class="fa-solid fa-bookmark"></i></h1>
+      </div>
+      <div class="posts-container" id="bookmarks-posts"></div>
+    </section>
+
+    <!-- ── PROFILE VIEW ───────────────────────── -->
+    <section id="view-profile" class="content-view hidden">
+      <div class="profile-wrapper" id="profile-wrapper">
+        <!-- Dynamically rendered -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Right Sidebar -->
+  <aside class="sidebar-right">
+    <div class="right-search-bar">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="right-search-input" placeholder="Search NexusX...">
+      <div class="search-results-dropdown" id="right-search-dropdown"></div>
+    </div>
+
+    <div class="right-card pulse-card">
+      <div class="pulse-header">
+        <div class="pulse-icon-wrap"><i class="fa-solid fa-bolt"></i></div>
+        <div>
+          <h3>Your Pulse Score</h3>
+          <p class="pulse-sub">Grows with every interaction</p>
+        </div>
+      </div>
+      <div class="pulse-score-display">
+        <span class="pulse-number" id="sidebar-pulse-score">—</span>
+        <span class="pulse-unit">pts</span>
+      </div>
+      <div class="pulse-bar-wrap">
+        <div class="pulse-bar" id="pulse-bar"></div>
+      </div>
+      <p class="pulse-rank" id="pulse-rank-text">Loading your rank...</p>
+    </div>
+
+    <div class="right-card trending-card">
+      <h3 class="right-card-title"><i class="fa-solid fa-fire"></i> Trending Now</h3>
+      <div class="trending-list" id="trending-list">
+        <div class="loading-state small"><i class="fa-solid fa-circle-notch fa-spin"></i></div>
+      </div>
+    </div>
+
+    <div class="right-card">
+      <h3 class="right-card-title"><i class="fa-solid fa-user-plus"></i> Who to Follow</h3>
+      <div class="who-to-follow-list" id="who-to-follow-list">
+        <div class="loading-state small"><i class="fa-solid fa-circle-notch fa-spin"></i></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="mobile-bottom-nav">
+    <button class="mob-nav-btn active" data-view="feed">
+      <i class="fa-solid fa-house"></i>
+    </button>
+    <button class="mob-nav-btn" data-view="explore">
+      <i class="fa-solid fa-compass"></i>
+    </button>
+    <button class="mob-nav-btn compose-mobile-center" id="mobile-compose-center">
+      <div class="compose-center-icon"><i class="fa-solid fa-plus"></i></div>
+    </button>
+    <button class="mob-nav-btn" data-view="notifications">
+      <i class="fa-solid fa-bell"></i>
+      <span class="mob-notif-dot hidden" id="mob-notif-dot"></span>
+    </button>
+    <button class="mob-nav-btn" data-view="profile">
+      <img id="mob-avatar" src="/uploads/default-avatar.png" alt="You" class="mob-avatar-img">
+    </button>
+  </nav>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     MODALS
+═══════════════════════════════════════════════════════════ -->
+
+<!-- Compose Modal -->
+<div class="modal-overlay hidden" id="compose-modal">
+  <div class="modal-box compose-modal-box">
+    <div class="modal-header">
+      <h2><i class="fa-solid fa-pen-to-square"></i> New Vibe</h2>
+      <button class="modal-close-btn" data-close="compose-modal"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="composer-top">
+        <img id="modal-composer-avatar" src="/uploads/default-avatar.png" alt="You" class="composer-avatar">
+        <div class="composer-input-wrap">
+          <textarea id="modal-composer-text" placeholder="What's your vibe today?" maxlength="500" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="composer-img-preview hidden" id="modal-img-preview">
+        <img id="modal-preview-img" src="" alt="Preview">
+        <button class="remove-img-btn" id="modal-remove-img-btn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <label class="composer-action-btn" for="modal-img-input">
+        <i class="fa-regular fa-image"></i> Photo
+        <input type="file" id="modal-img-input" accept="image/*" class="hidden">
+      </label>
+      <button class="btn-post" id="modal-submit-vibe-btn">
+        <span>Post Vibe</span>
+        <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Comments Modal -->
+<div class="modal-overlay hidden" id="comments-modal">
+  <div class="modal-box comments-modal-box">
+    <div class="modal-header">
+      <h2>Replies</h2>
+      <button class="modal-close-btn" data-close="comments-modal"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body" id="comments-modal-body">
+      <div id="modal-original-post"></div>
+      <div class="comments-divider"><span>Replies</span></div>
+      <div class="comments-list" id="comments-list"></div>
+    </div>
+    <div class="modal-footer comment-footer">
+      <img id="comment-avatar" src="/uploads/default-avatar.png" alt="You" class="composer-avatar sm">
+      <div class="comment-input-wrap">
+        <input type="text" id="comment-input" placeholder="Add a reply..." maxlength="300">
+        <button class="comment-send-btn" id="comment-send-btn">
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Reaction Picker (attached dynamically) -->
+<div class="reaction-picker hidden" id="reaction-picker">
+  <div class="reaction-picker-inner">
+    <button class="reaction-emoji-btn" data-emoji="❤️">❤️</button>
+    <button class="reaction-emoji-btn" data-emoji="🔥">🔥</button>
+    <button class="reaction-emoji-btn" data-emoji="😂">😂</button>
+    <button class="reaction-emoji-btn" data-emoji="😮">😮</button>
+    <button class="reaction-emoji-btn" data-emoji="😢">😢</button>
+    <button class="reaction-emoji-btn" data-emoji="🤯">🤯</button>
+    <button class="reaction-emoji-btn" data-emoji="👏">👏</button>
+    <button class="reaction-emoji-btn" data-emoji="🚀">🚀</button>
+  </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div class="modal-overlay hidden" id="edit-profile-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>Edit Profile</h2>
+      <button class="modal-close-btn" data-close="edit-profile-modal"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <form id="edit-profile-form" enctype="multipart/form-data">
+      <div class="modal-body">
+        <div class="banner-edit-container">
+          <div class="edit-banner-preview" id="edit-banner-preview" style="background: linear-gradient(135deg, var(--nx-accent), var(--nx-purple));">
+            <label class="banner-upload-label" for="edit-banner-input">
+              <i class="fa-solid fa-camera"></i> Change Banner
+              <input type="file" id="edit-banner-input" name="banner" accept="image/*" class="hidden">
+            </label>
+          </div>
+          <div class="avatar-edit-wrap">
+            <img id="edit-avatar-preview" src="/uploads/default-avatar.png" alt="Avatar" class="edit-avatar-img">
+            <label class="avatar-upload-label" for="edit-avatar-input">
+              <i class="fa-solid fa-camera"></i>
+              <input type="file" id="edit-avatar-input" name="avatar" accept="image/*" class="hidden">
+            </label>
+          </div>
+        </div>
+        <div class="form-field">
+          <div class="field-icon"><i class="fa-regular fa-id-badge"></i></div>
+          <input type="text" id="edit-display-name" placeholder="Display Name">
+        </div>
+        <div class="form-field textarea-field">
+          <div class="field-icon"><i class="fa-regular fa-file-lines"></i></div>
+          <textarea id="edit-bio" placeholder="Tell the world about yourself..." maxlength="200" rows="3"></textarea>
+        </div>
+        <div class="form-field">
+          <div class="field-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <input type="text" id="edit-location" placeholder="Location">
+        </div>
+        <div class="form-field">
+          <div class="field-icon"><i class="fa-solid fa-link"></i></div>
+          <input type="url" id="edit-website" placeholder="Website URL">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" data-close="edit-profile-modal">Cancel</button>
+        <button type="submit" class="btn-post">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Image Lightbox -->
+<div class="lightbox hidden" id="lightbox">
+  <button class="lightbox-close" id="lightbox-close"><i class="fa-solid fa-xmark"></i></button>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="Full size image">
+</div>
+
+<!-- Toast Container -->
+<div id="toast-container" class="toast-container"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+# This file keeps the uploads directory tracked in git.
+# Actual uploaded files are excluded via .gitignore.
